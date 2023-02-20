@@ -1,6 +1,5 @@
 'use client';
 import {useEffect, useState} from "react";
-import { create } from "zustand";
 import {useStore} from "../components/StoreInitializer";
 
 export default function Home() {
