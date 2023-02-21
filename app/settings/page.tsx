@@ -21,7 +21,7 @@ export default function Home() {
         return (<h1>{count}</h1>);
     }
     return(
-        <main className="h-[90vh]">
+        <main className="h-screen">
             <h1 className="gray-blackGradient flex pl-6 justify-center lg:justify-start" aria-label='About'>
                 {/* S */}
                 <svg className="animate-bounce hover:scale-150 transition" width={String(SIZE)} height={String(SIZE)} viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">

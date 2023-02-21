@@ -21,7 +21,7 @@ export default function RootLayout({
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body >
+      <body className="h-screen flex flex-col">
         <nav className='flex flex-col items-center justify-center my-4 lg:flex-row lg:flex lg:items-center lg:flex-wrap lg:justify-between lg:mx-4'>
           <Link className="coolText text-3xl" href="/"><b>Welcome to TrivAI</b></Link>
           <div className='flex flex-row space-x-4 mb-2 lg:mb-0'>

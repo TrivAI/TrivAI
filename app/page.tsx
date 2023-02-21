@@ -20,7 +20,7 @@ const rows = [
 
 export default function Home() {
   return (
-    <main className="h-[90vh]">
+    <main className="h-screen">
       <div className="flex justify-center flex-col">
         <h1 className='text-3xl m-4 p-4 text-center'><b>LEADERBOARD</b></h1>
         <div className="overflow-x-auto">

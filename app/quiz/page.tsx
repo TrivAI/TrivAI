@@ -5,7 +5,7 @@ export default function Home() {
     // let data = await fetch('http://localhost:3000/api/hello').then((res)=> res.json());
     const SIZE =64;
     return (
-        <main className="h-[90vh]">
+        <main className="h-screen">
             <h1 className="gray-blackGradient flex pl-6 justify-center lg:justify-start" aria-label="Quiz">
                 {/* Q */}
                 <svg className="animate-bounce hover:scale-150 transition" width={String(SIZE)} height={String(SIZE)} viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">

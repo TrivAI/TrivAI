@@ -6,7 +6,7 @@ export default function Home() {
     const SIZE = 64; 
 
     return (
-        <main className="h-[90vh]">
+        <main className="h-screen">
             <h1 className="gray-blackGradient flex pl-6 justify-center lg:justify-start" aria-label='About'>
                 {/* A */}
                 <svg className="animate-bounce hover:scale-150 transition" width={String(SIZE)} height={String(SIZE)} viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
