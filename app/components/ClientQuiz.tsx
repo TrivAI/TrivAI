@@ -31,7 +31,7 @@ export default function ClientQuiz() {
                 <div className='m-4 flex flex-col'>
                     <h1>{pokemon.pokemonName}</h1>
                     <div className='bg-white'>
-                        <img className= {`brightness-${brightness}`} src={pokemon.sprites} />
+                        <img className= {`brightness-${brightness}`} src={pokemon.sprite} />
                     </div>
                     <button className="mt-4 p-2 border border-blue-500" onClick={() => setBrightness(100)}>reveal pokemon</button>
                 </div>
