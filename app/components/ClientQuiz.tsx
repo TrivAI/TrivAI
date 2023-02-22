@@ -11,13 +11,13 @@ export default function ClientQuiz() {
         fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
             .then(res => res.json())
             .then(data => {
-                setPokemon(data);
+                setPokemon(data as any);
             });
     },[]);
     const {count, name, inc} = useStore((state) => state);
-    if (pokemon) {
-         console.log(pokemon.sprites.other['official-artwork']['front_default']);
-    }
+    // if (pokemon) {
+    //      console.log(pokemon?.sprites.other['official-artwork']['front_default']);
+    // }
     return (
         <div className="flex flex-col justify-center items-center">
             <p>{name}</p>
@@ -27,9 +27,9 @@ export default function ClientQuiz() {
             
             {pokemon && (  
                 <div className='m-4 flex flex-col'>
-                    <h1>{pokemon.name}</h1>
+                    <h1>{pokemon!.name}</h1>
                     <div className='bg-white'>
-                        <img className= {`brightness-${brightness}`} src={pokemon.sprites.other['official-artwork']['front_default']} />
+                        <img className= {`brightness-${brightness}`} src={pokemon!.sprites.other['official-artwork']['front_default']} />
                     </div>
                     <button className="mt-4 p-2 border border-blue-500" onClick={() => setBrightness(100)}>reveal pokemon</button>
                 </div>
