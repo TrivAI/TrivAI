@@ -17,9 +17,7 @@ export default function ClientQuiz() {
             });
     },[]);
     const {count, name, inc} = useStore((state) => state);
-    // if (pokemon) {
-    //      console.log(pokemon?.sprites.other['official-artwork']['front_default']);
-    // }
+
     return (
         <div className="flex flex-col justify-center items-center">
             <p>{name}</p>
