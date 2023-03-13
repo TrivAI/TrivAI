@@ -1,5 +1,5 @@
 
-export default function Head() {
+export default function head() {
   return (
     <>
       <title>TrivAI</title>

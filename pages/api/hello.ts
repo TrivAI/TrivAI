@@ -9,7 +9,7 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  console.log("Ive been hit");
+  console.log("hello api has been hit");
   
-  res.status(200).json({ dude: 'Hello from the backend you just hit an api' })
+  res.status(200).setHeader("Set-Cookie","name=vicccc").json({ dude: 'Hello from the backend you just hit an api' });
 }

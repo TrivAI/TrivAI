@@ -1,6 +1,7 @@
 'use client';
+import { useStore } from "@/src/store";
 import {useEffect, useState} from "react";
-import {useStore} from "../components/StoreInitializer";
+
 
 export default function Home() {
     let [data, setData] = useState<any>();
@@ -21,8 +22,8 @@ export default function Home() {
         return (<h1>{count}</h1>);
     }
     return(
-        <main className="h-screen">
-            <h1 className="gray-blackGradient flex pl-6 justify-center lg:justify-start" aria-label='About'>
+        <main className="">
+            <h1 className="gray-blackGradient flex p-2 justify-center lg:justify-start" aria-label='About'>
                 {/* S */}
                 <svg className="animate-bounce hover:scale-150 transition" width={String(SIZE)} height={String(SIZE)} viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="18" y="18" width="68" height="68" fill="black" stroke="black" strokeWidth="4" strokeLinejoin="round"/>

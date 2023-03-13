@@ -43,6 +43,7 @@
   --callout-border-rgb: 172, 175, 176;
   --card-rgb: 180, 185, 188;
   --card-border-rgb: 131, 134, 135;
+  --tab-border-color: #69E4FF !important;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -120,4 +121,11 @@ a {
 
 .gray-blackGradient {
   background-image: linear-gradient(90deg, #334155 65%, #000);
+}
+
+
+.coolBackground {
+  background: linear-gradient(0deg, transparent 0, #000000 800px), 
+              fixed 0 0 /20px 20px radial-gradient(#9c43d8 1px, transparent 0), 
+              fixed 10px 10px /20px 20px radial-gradient(#594c4c 1px, #000 0);
 }

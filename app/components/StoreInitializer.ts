@@ -1,7 +1,13 @@
 "use client";
-import createStoreHook from "../../src/store"; 
+import { useRef } from "react";
+import { useStore } from "../../src/store"; 
 
-export const useStore = createStoreHook();
+// fetch(`${checkEnvironment(" coming from storeinitial.ts")}/api/cheat`).then(res => res.json()).then(data => {
+//     console.log("checking if data is here from storeinitial.ts");
+//     console.log(data);
+//     newdata = data.cheatUsed;
+//     return createStoreHook(data.cheatUsed);
+// });
 // import { create } from 'zustand';
 
 // export const useStore = create<{
@@ -21,13 +27,13 @@ export const useStore = createStoreHook();
 // function increment(num: number) : number {
 //     return num +1;
 // }
-// export default function StoreInitializer({count, name, inc}: {count: number; name: string; inc: () => void}) {
-//     const initialized = useRef(false);
-//     if (!initialized.current) {
+export default function StoreInitializer({cheatUsed}: {cheatUsed: boolean}) {
+    const initialized = useRef(false);
+    if (!initialized.current) {
 
-//         useStore.setState({count, name, inc});
-//         initialized.current = true;
-//     }
-//     return null;
-// }
+        initialized.current = true;
+        useStore.setState({cheatUsed: cheatUsed});
+    }
+    return null;
+}
 

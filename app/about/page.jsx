@@ -1,13 +1,13 @@
 
-import ClientAbout from '../components/ClientAbout';
+import ClientAbout from './ClientAbout';
 
 
 export default function Home() {
     const SIZE = 64; 
 
     return (
-        <main className="h-screen">
-            <h1 className="gray-blackGradient flex pl-6 justify-center lg:justify-start" aria-label='About'>
+        <main className="">
+            <h1 className="mb-4 gray-blackGradient flex p-2 justify-center lg:justify-start" aria-label='About'>
                 {/* A */}
                 <svg className="animate-bounce hover:scale-150 transition" width={String(SIZE)} height={String(SIZE)} viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="18" y="18" width="68" height="68" fill="black" stroke="black" strokeWidth="4" strokeLinejoin="round"/>

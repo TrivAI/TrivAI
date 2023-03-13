@@ -1,5 +1,7 @@
 'use client';
-import {useStore}  from './StoreInitializer';
+
+import { useStore } from "@/src/store";
+
 
 export default function ClientAbout() {
     const {count, name, inc} = useStore((state) => state);
