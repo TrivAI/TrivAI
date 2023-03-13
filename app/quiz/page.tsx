@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export const routes = [ "Pokemon", "Movies", "Games", "Geography", "Cars",];
+const routes = [ "Pokemon", "Movies", "Games", "Geography", "Cars"];
 
 export default function Home() {
     // let data = await fetch('http://localhost:3000/api/hello').then((res)=> res.json());
