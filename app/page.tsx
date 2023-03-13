@@ -1,9 +1,6 @@
 import Image from 'next/image'
-import Link  from 'next/link'
+
 import { Inter } from '@next/font/google'
-import styles from './page.module.css'
-
-
 const inter = Inter({ subsets: ['latin'] })
 
 const rows = [
@@ -19,12 +16,13 @@ const rows = [
 ];
 
 export default function Home() {
+  rows.sort((a: any,b: any)=> b.score - a.score);
   return (
-    <main className="h-screen">
+    <main className="">
       <div className="flex justify-center flex-col">
         <h1 className='text-3xl m-4 p-4 text-center'><b>LEADERBOARD</b></h1>
         <div className="overflow-x-auto">
-          <table className="table w-full">
+          <table className="table w-full mb-12" data-theme="">
             {/* <!-- head --> */}
             <thead>
               <tr>
@@ -36,7 +34,7 @@ export default function Home() {
                 <th>Score</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="">
               {/* <!-- row 1 --> */}
               {rows.map((row) => (
                 <tr key={row.id}>
