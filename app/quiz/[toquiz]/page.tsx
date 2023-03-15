@@ -7,8 +7,8 @@ import ClientMovie from "./ClientMovie";
 
 
 async function getCheatUsed() {
-    const response = await fetch('http://localhost:3000/api/cheat');
-    return JSON.parse(await response.json());
+    const response = await fetch(new URL('/api/cheat', checkEnvironment()));
+    return await response.json();
 }
 
 export default async function Page({params} : {params: {toquiz: string}}) {

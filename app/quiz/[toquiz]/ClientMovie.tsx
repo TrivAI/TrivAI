@@ -42,7 +42,8 @@ export default function ClientPokemon( {cheat} : {cheat: boolean} ) {
     };
     return (
         <div className="p-4 flex flex-col justify-center items-center ">
-            {cheatUsed ? <CheatCode/> : ""}
+            
+            {!cheatUsed ? <CheatCode/> : ""}
             {/* <StoreInitializer cheatUsed={cheatUsed}/> */}
             <p>{name}</p>
             {/* <button className="border-2 border-red-400" >Increment</button> */}
