@@ -6,14 +6,11 @@ import { usePathname } from 'next/navigation';
 import { useStore } from '../../src/store';
 
 
-export default function CheatCode({cheatUsed} : {cheatUsed: boolean}) {
+export default function CheatCode() {
 
     let { removeCheat } = useStore(state => state);
-    if (cheatUsed === true) {
-        return null;
-    }
     useEffect(() => {
-        alert("jscheat init");
+        
         jsCheat.init({
             code: ['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'],
             callback: () => {
@@ -22,6 +19,6 @@ export default function CheatCode({cheatUsed} : {cheatUsed: boolean}) {
                 jsCheat.controller.abort();
             }
         });
-    }, []);
+    }, [removeCheat]);
     return null;
 }
