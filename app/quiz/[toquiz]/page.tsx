@@ -16,6 +16,7 @@ export default async function Page({params} : {params: {toquiz: string}}) {
     // console.log(useStore.getState().cheatUsed);
     
     const {cheatUsed} : {cheatUsed : boolean} = await getCheatUsed();
+    // const cheatUsed: boolean = false;
     
     useStore.setState({cheatUsed: cheatUsed});
     return (
