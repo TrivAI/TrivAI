@@ -5,7 +5,7 @@ const nextConfig = {
     domains: ['raw.githubusercontent.com'],
     remotePatterns: [
       {
-        protocol: 'https://',
+        protocol: 'https',
         hostname: 'raw.githubusercontent.com',
         port: '443',
         pathname: '/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/**',

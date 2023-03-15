@@ -13,14 +13,13 @@ interface Star {
 
 const Starfield: React.FC<{style: string;}> = ( {style} ) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  let viewWidth : number;
-  let viewHeight : number;
+
   const fov = 150;
   const viewZ = 150;
 
   useEffect(() => {
-    viewWidth = canvasRef.current!.parentElement!.offsetWidth;
-    viewHeight = canvasRef.current!.parentElement!.offsetHeight;
+    let viewWidth : number = canvasRef.current!.parentElement!.offsetWidth;
+    let viewHeight : number = canvasRef.current!.parentElement!.offsetHeight;
     
     // console.log(parentRef.current?.parentElement?.offsetWidth);
     const canvas = canvasRef.current;

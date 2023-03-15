@@ -7,20 +7,20 @@ type Cheat = {
 
 export default function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Cheat>
+  res: NextApiResponse<string>
 ) 
 {
     switch (req.method) {
         case 'GET': {
-            let data: Cheat = JSON.parse(fs.readFileSync('cheat.json', 'utf8'));
+            let data: string = fs.readFileSync('cheat.json', 'utf8')
             // console.log("get hit");
             // console.log(data);
             
-            res.status(200).json(data);
+            res.status(200).send(data);
             break;
         }
         case 'POST': {
-            let data : Cheat = req.body;
+            let data : string = req.body;
             console.log("post hit");
             console.log(data);
             fs.writeFileSync('cheat.json', JSON.stringify(data));

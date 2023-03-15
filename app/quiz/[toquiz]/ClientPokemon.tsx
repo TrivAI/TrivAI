@@ -19,7 +19,6 @@ export default function ClientPokemon( {cheat} : {cheat: boolean} ) {
     const {count, name, inc, cheatUsed } = useStore(state => state);
     
     useEffect(() => {
-        
         fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
             .then(res => res.json())
             .then(data => {
@@ -28,12 +27,12 @@ export default function ClientPokemon( {cheat} : {cheat: boolean} ) {
                 console.log(sprite);
                 setPokemon({pokemonName: name, sprite: sprite});
             });
-    },[]);
+    }, []);
     
     
     return (
         <div className="p-4 flex flex-col justify-center items-center ">
-            <CheatCode cheatUsed={cheatUsed}/>
+            {cheatUsed ? <CheatCode /> : ""}
             {/* <StoreInitializer cheatUsed={cheatUsed}/> */}
             <p>{name}</p>
             <p>Counter: {count}</p>

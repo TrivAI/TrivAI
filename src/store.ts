@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import {checkEnvironment} from './checkEnvironment';
+import checkEnvironment from './checkEnvironment';
 
 interface Store {
     name: string;
