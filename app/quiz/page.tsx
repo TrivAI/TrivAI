@@ -4,7 +4,8 @@ const routes = [ "Pokemon", "Movies", "Games", "Geography", "Cars"];
 
 export default function Home() {
     // let data = await fetch('http://localhost:3000/api/hello').then((res)=> res.json());
-
+    
+    
     return (
         <div className="grid grid-cols-2 gap-4 h-screen lg:h-auto">
             { routes.map((route) => {

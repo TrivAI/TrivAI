@@ -1,26 +1,27 @@
-'use client';
 import { useStore } from "@/src/store";
-import {useEffect, useState} from "react";
+import VModel from "../components/VModel";
+import StoreCounter from "./ClientSettings";
+import { getCurrentUser } from "@/src/session";
 
+// const 
 
-export default function Home() {
-    let [data, setData] = useState<any>();
+export default async function Page() {
+    // let [data, setData] = useState<any>();
     const SIZE = 64;
-    useEffect(() => {
-        fetch("/api/hello").then((res) => res.json()).then((data) => {
-            setData(data);
-        });
-    }, []);
+    // const theUser = await getCurrentUser();
+    // if (!theUser) {
+    //     return (
+    //         <main className="">
+    //             you are not signed in
+    //         </main>
+    //     );
+    // }
+    // async function getHello() {
+    //     const response = await fetch("api/hello");
+    //     return await response.json();
+    // }
 
-    function Controls() {
-        const inc = useStore(state => state.inc);
-        return (<button className="rounded-full border-2 border-indigo-500 p-4" onClick={inc}>one up</button>);
-    }
-
-    function Counter() {
-        const count = useStore(state => state.count);
-        return (<h1>{count}</h1>);
-    }
+    // const hello : any =  getHello();
     return(
         <main className="">
             <h1 className="gray-blackGradient flex p-2 justify-center lg:justify-start" aria-label='About'>
@@ -85,9 +86,11 @@ export default function Home() {
                 </svg>
             </h1>
 
-            {data ? <p>{JSON.stringify(data)}</p> : <p>loading</p>}
-            <Controls /> 
-            <Counter />
+            {/* {hello ? <p>{JSON.stringify(hello)}hi</p> : <p>loading</p>} */}
+            {/* <h1>{hello.hello}</h1> */}
+            <StoreCounter />
+            <VModel />
+            {/* <pre>here is data: {JSON.stringify(theUser, null, 2)} </pre> */}
         </main>
     );
 }

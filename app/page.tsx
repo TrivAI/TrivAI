@@ -1,7 +1,11 @@
 import Image from 'next/image'
-
 import { Inter } from '@next/font/google'
+
+
 const inter = Inter({ subsets: ['latin'] })
+
+console.log("hi from server");
+
 
 const rows = [
   { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35, allegiance: "House Targaryen", score: 100},
@@ -16,6 +20,7 @@ const rows = [
 ];
 
 export default function Home() {
+
   rows.sort((a: any,b: any)=> b.score - a.score);
   return (
     <main className="">
@@ -36,9 +41,9 @@ export default function Home() {
             </thead>
             <tbody className="">
               {/* <!-- row 1 --> */}
-              {rows.map((row) => (
+              {rows.map((row, index) => (
                 <tr key={row.id}>
-                  <th>{row.id}</th> 
+                  <th>{index + 1}</th> 
                   <td>{row.firstName}</td>
                   <td>{row.lastName}</td>
                   <td>{row.age}</td>
@@ -48,6 +53,9 @@ export default function Home() {
               ))}
             </tbody>
           </table>
+        </div>
+        <div>
+
         </div>
       </div>
     </main>
