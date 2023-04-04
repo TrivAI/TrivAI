@@ -129,3 +129,32 @@ a {
               fixed 0 0 /20px 20px radial-gradient(#9c43d8 1px, transparent 0), 
               fixed 10px 10px /20px 20px radial-gradient(#594c4c 1px, #000 0);
 }
+
+.errorPage-numberBox {
+  background-color: rgb(39 18 74/ 1);
+  padding-bottom: 100%;
+  opacity: 0;
+  z-index: 10;
+  box-shadow: 0 0 #0000, 0 0 #0000, rgba(0, 0, 0, .5);
+  animation: errorPage-numberBox 3s ease-in-out infinite;
+}
+.errorPage-square {
+  background-color: #000;
+  padding-bottom: 100%;
+}
+.errorPage-numberBox2 {
+  animation-delay: .5s;
+}
+.errorPage-numberBox3 {
+  animation-delay: 1s;
+}
+
+.errorPage-radialGradient {
+  background: radial-gradient(ellipse farthest-side, hsla(0, 0%, 7%, 0) 0%, hsla(0, 0%, 7%, 0) 50%, #111 100%);;
+}
+
+@keyframes errorPage-numberBox {
+  50% {
+    opacity: 1;
+  }
+}

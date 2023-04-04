@@ -11,15 +11,19 @@ interface Star {
   trail: [number, number][];
 }
 
-const Starfield: React.FC<{style: string;}> = ( {style} ) => {
+const Starfield: React.FC<{style: string; width: number; height: number;}> = ( {style, width, height} ) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  const fov = 150;
+  // const windowWidth = window.innerWidth;
+  const fov = 100;
   const viewZ = 150;
-
+  console.log("this is from starfield");
+  
+  console.log(width);
+  console.log(height);
+  
   useEffect(() => {
-    let viewWidth : number = canvasRef.current!.parentElement!.offsetWidth;
-    let viewHeight : number = canvasRef.current!.parentElement!.offsetHeight;
+    let viewWidth : number = width;
+    let viewHeight : number = height;
     
     // console.log(parentRef.current?.parentElement?.offsetWidth);
     const canvas = canvasRef.current;
@@ -44,6 +48,7 @@ const Starfield: React.FC<{style: string;}> = ( {style} ) => {
     };
 
     const drawStar = (star: Star) => {
+      // ctx.clearRect(0, 0, viewWidth, viewHeight);
       const sx = (star.x * fov) / star.z + viewWidth / 2;
       const sy = (star.y * fov) / star.z + viewHeight / 2;
       const size = (star.size * fov) / star.z;
@@ -107,7 +112,11 @@ const Starfield: React.FC<{style: string;}> = ( {style} ) => {
     };
   }, []);
 
-  return (<canvas className={style} ref={canvasRef} width={1600} height={75}/> );
+  return (
+    <>
+      { width > 0 ? <canvas className={style} ref={canvasRef} width={width} height={height}/> : ""}
+    </>
+  );
 };
 
 export default Starfield;

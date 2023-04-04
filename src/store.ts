@@ -1,33 +1,42 @@
 import { create } from 'zustand';
 import checkEnvironment from './checkEnvironment';
 
-interface Store {
+export type State = {
+    id: string;
     name: string;
-    count: number;
+    totalScore: number;
+    role: string;
+    image: string;
     cheatUsed?: any;
-    inc: () => void;
+}
+
+export type Actions = {
+    initCheat: (cheat: string) => void;
+    incrementScore: () => void;
     removeCheat: () => void;
 }
 
 
-export const useStore = create<Store>(set => ({
-    name: 'Victor',
-    count: 0,
-    // cheatUsed: true,
-    initCheat: async () => {
-        const response = await fetch(new URL("/api/cheat", checkEnvironment()));
-        set({cheatUsed: response.json().then(data => data.cheatUsed)})
+export const useStore = create<State & Actions>((set, get) => ({
+    id: '',
+    name: '',
+    totalScore: 0,
+    role: '',
+    cheatUsed: false,
+    image: '',
+    initCheat: (cheat: string) => {
+        set({cheatUsed: cheat});
     },
-    inc: () => set(state  => {return { count: state.count + 1 } } ),
+    incrementScore: () => set(state  =>({ totalScore: state.totalScore + 1 })),
     removeCheat: async () => {
         const response = await fetch(new URL("/api/cheat", checkEnvironment()), {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({cheatUsed: true})
+            body: JSON.stringify({id: get().id, cheatUsed: get().cheatUsed})
         });
-        set({cheatUsed: response.json().then(data => data.cheatUsed)})
+        set({cheatUsed: response.json().then(data => data.cheatUsed)});
     }
 }));
 
