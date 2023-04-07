@@ -24,12 +24,17 @@ export default function ClientMovie() {
   );
 
   useEffect(() => {
-    fetch("/api/movies")
+    try {
+      fetch("/api/movies")
       .then((res) => res.json())
       .then((movieQuestionsObject) => {
         setQuestions(movieQuestionsObject.questions);
         console.log(movieQuestionsObject.questions);
       });
+    }
+    catch (error) {
+      console.log(error);
+    }
   }, []);
 
   const checkAnswer = (answer: string) => {

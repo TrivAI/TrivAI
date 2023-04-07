@@ -20,7 +20,7 @@ const roboto = Roboto({
 })
 export default async function RootLayout({
   children,
-  session
+  session 
 }: IProps) {
   const theUser = await getCurrentUser();
   // const userEmail = theUser?.email;
