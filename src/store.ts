@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import checkEnvironment from './checkEnvironment';
 
-export type State = {
+export type UserState = {
     id: string;
     name: string;
     totalScore: number;
@@ -17,13 +17,18 @@ export type Actions = {
 }
 
 
-export const useStore = create<State & Actions>((set, get) => ({
+export const useStore = create<UserState & Actions>((set, get) => ({
     id: '',
     name: '',
     totalScore: 0,
     role: '',
     cheatUsed: false,
     image: '',
+    pokemon: [],
+    movies: [],
+    games: [],
+    cars: [],
+    geography: [],
     initCheat: (cheat: string) => {
         set({cheatUsed: cheat});
     },

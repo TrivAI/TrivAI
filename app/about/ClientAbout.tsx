@@ -1,50 +1,106 @@
 'use client';
 
 import { useStore } from "@/src/store";
+import { useState } from "react";
 
+async function sendForm(obj : any) {
+  let response : Response | undefined;
+  try {
+    response = await fetch("/api/feedBack", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(obj),
+    });
+  }
+  catch (e : any) {
+    console.log("this is the error", e);
+    return new Error("Network Error", e);
+  }
+  return response?.ok
+    ? response.json()
+    : { message: new Error("Failed post request") };
+}
+
+// function shakeAnimation
 
 export default function ClientAbout() {
     const { totalScore, name, incrementScore } = useStore((state) => state);
-    return (
-      <div>
-        <svg
-          className=""
-          width="64"
-          height="64"
-          viewBox="0 0 96 96"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <rect
-            x="18"
-            y="18"
-            width="68"
-            height="68"
-            fill="black"
-            stroke="black"
-            strokeWidth="4"
-            strokeLinejoin="round"
-          />
-          <rect
-            x="10"
-            y="10"
-            width="68"
-            height="68"
-            fill="#FFF500"
-            stroke="black"
-            strokeWidth="4"
-            strokeLinejoin="round"
-          />
-          <path d="M42 28L26 44L42 60" stroke="black" strokeWidth="8" />
-          <path d="M26 44H68" stroke="black" strokeWidth="8" />
-        </svg>
+    const [nameForm, setNameForm] = useState("");
+    const [hasSubmit, setHasSubmit] = useState(false);
+    const [error, setError] = useState(false);
+    const submitForm = async (e : any) =>{
+      e.preventDefault();
+      setError(false);
+      let form = e.target;
+      
+      const formData = new FormData(form);
+      
+      const formJson = Object.fromEntries(formData.entries());
+      const response = await sendForm(formJson);
+      console.log(response.message);
+      
+      if (response.message != "success") { 
+        setError(true);
+        return;
+      }
+      setHasSubmit(true);
+      e.target.reset();
+    }
 
-        <p>This is the about website</p>
-        <p>Counter: {totalScore}</p>
-        <p>Name: {name}</p>
-        <button className="border-2 border-red-400" onClick={incrementScore}>
-          Increment
-        </button>
+    return (
+      <div className="flex justify-center items-center flex-col w-fit my-4 mx-auto">
+        <h1 className="m-4 text-2xl">Feed Back</h1>
+        <form
+          className={
+            "flex flex-col " +
+            (hasSubmit && !error ? "border-green-400 border-4" : "") +
+            (error ? "border-red-400 border-4" : "")
+          }
+          onSubmit={submitForm}
+          // ref={(node) => console.log(node)}
+        >
+          <label className="flex m-4 items-center justify-between">
+            <span>Name:</span>
+            <input
+              className="ml-4 p-2 bg-[#364153]"
+              type="text"
+              name="name"
+              disabled={false}
+              placeholder="Dude Bro"
+              
+            />
+          </label>
+          <label className="flex m-4 items-center justify-between">
+            <span>Email:</span>
+            <input
+              className="ml-4 p-2 bg-[#364153]"
+              type="email"
+              name="email"
+              disabled={false}
+              placeholder="hi123@live.com"
+              required
+            />
+          </label>
+          <label className="flex m-4 items-center justify-between">
+            <span>Message:</span>
+            <input
+              className="ml-4 p-2 bg-[#364153]"
+              type="text"
+              name="message"
+              disabled={false}
+              placeholder="This thing sucks..."
+              required
+            />
+          </label>
+          <button
+            type="submit"
+            className="border border-blue-500 p-2 m-4 hover:bg-blue-500 hover:text-black"
+          >
+            Submit
+          </button>
+        </form>
       </div>
     );
 }

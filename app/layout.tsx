@@ -7,7 +7,7 @@ import { db } from '@/src/db';
 
 import { useStore } from '@/src/store';
 import { getCurrentUser } from '@/src/session';
-import type { State } from '@/src/store';
+import type { UserState } from '@/src/store';
 
 interface IProps {
   children: React.ReactNode;
@@ -22,10 +22,12 @@ export default async function RootLayout({
   children,
   session 
 }: IProps) {
+  console.log("running");
+  
   const theUser = await getCurrentUser();
   // const userEmail = theUser?.email;
   if(theUser) {
-      const user: State = (await db.user.findFirst({
+      const user: UserState = (await db.user.findFirst({
         where: {
           email: theUser?.email,
         },
@@ -37,7 +39,7 @@ export default async function RootLayout({
           cheatUsed: true,
           image: true,
         },
-      })) as State;
+      })) as UserState;
       useStore.setState(user);
   } else {
       console.log("no user from layout");

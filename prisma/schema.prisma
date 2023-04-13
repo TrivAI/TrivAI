@@ -35,7 +35,6 @@ enum Category {
   NATURE
   TRAVEL
   POLITICS
-  RELIGION
   CELEBRITIES
   COMICS
   GAMES
@@ -77,15 +76,15 @@ model User {
   id            String        @id @default(cuid())
   name          String?
   email         String?       @unique
-  emailVerified DateTime?
+  emailVerified String?
   image         String?
   accounts      Account[]
   sessions      Session[]
   role          Role          @default(USER)
   cheatUsed     Boolean       @default(false)
   cheatUsedAt   DateTime?
-  createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
+  createdAt     DateTime      
+  updatedAt     DateTime?      
   totalScore    Int           @default(0)
   UserAnswers   UserAnswers[]
 }
@@ -97,7 +96,28 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+ model QuizCategory {
+  id            Int     @id @default(autoincrement())
+  category      Category  
+  active        Boolean @default(true)
+  basePrompt    String
+  createdAt     DateTime
+  isActive      Boolean @default(true)
+ }
+model KeywordPrompt {
+  id            Int         @id @default(autoincrement())
+  keyword       String
+  category      Category
+  used          Boolean     @default(false)
+}
 
+model QuestionData {
+  id            Int         @id @default(autoincrement())
+  category      Category
+  used          Boolean     @default(false)
+  createdAt     DateTime    
+  answer        String
+}
 model Question {
   id            String        @id @default(cuid())
   description   String
@@ -106,24 +126,25 @@ model Question {
   answer1       String
   answer2       String
   answer3       String
-  answer4       String
   correctAnswer String
   createdAt     DateTime      @default(now())
-  updatedAt     DateTime      @updatedAt
-  dateDue       DateTime
+  updatedAt     DateTime?      
+  dateDue       DateTime      
   image         String
-  UserAnswers   UserAnswers[]
 }
-
+model AllAnswers {
+  id          Int    @id  @default(autoincrement())
+  category    Category
+  answer      String
+}
 model UserAnswers {
   id             String   @id @default(cuid())
   userId         String
   questionId     String
   selectedAnswer String
-  createdAt      DateTime @default(now())
+  createdAt      DateTime     @default(now())
 
   user     User     @relation(fields: [userId], references: [id])
-  question Question @relation(fields: [questionId], references: [id])
   @@index([userId])
   @@index([questionId])
 }
