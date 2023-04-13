@@ -1,8 +1,17 @@
 import ClientAbout from "./ClientAbout";
 
-export default function Home() {
+export default async function Home() {
   const SIZE = 64;
-
+  const id = Math.floor(Math.random() * 898) + 1;
+  
+  // const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`, { next: {revalidate: 5} }); 
+  // http://worldtimeapi.org/api/timezone/America/Los_Angeles
+  const res = await fetch(`http://worldtimeapi.org/api/timezone/America/Los_Angeles`, { next: {revalidate: 5} });
+  const data = await res.json();
+  console.log(data.datetime);
+  
+  let num = 0;
+  console.log("got pokemon", num++);
   return (
     <main className="">
       <h1
@@ -186,6 +195,7 @@ export default function Home() {
           <path d="M44 68L44 20" stroke="black" strokeWidth="8" />
         </svg>
       </h1>
+      <div>{data.datetime}</div>
       <ClientAbout />
     </main>
   );

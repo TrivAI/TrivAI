@@ -1,10 +1,11 @@
 'use client';
 import React, { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import * as THREE from 'three';
+import { Box3, Vector3} from 'three';
+import type { Mesh } from 'three';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
-import fontJson from '../../public/helvetiker_regular.typeface.json';
+// import fontJson from '../../public/helvetiker_regular.typeface.json';
 
 // const font = new THREE.Font(fontJson);
 
@@ -12,28 +13,28 @@ const VModel: React.FC = () => {
 
 
   const V : React.FC = () => {
-    const meshRef = useRef<THREE.Mesh>(null!);
-    const vShapePoints = [
-        0, 0, 0,
-        -1, 1, 0,
-        -0.5, 1, 0,
-        0, 0.5, 0,
-        0.5, 1, 0,
-        1, 1, 0,
-        0, 0, 0
-    ];
+    const meshRef = useRef<Mesh>(null!);
+    // const vShapePoints = [
+    //     0, 0, 0,
+    //     -1, 1, 0,
+    //     -0.5, 1, 0,
+    //     0, 0.5, 0,
+    //     0.5, 1, 0,
+    //     1, 1, 0,
+    //     0, 0, 0
+    // ];
 
-    const vShapeFaces = [
-        0, 1, 2,
-        0, 2, 3,
-        0, 3, 4,
-        0, 4, 5
-    ];
+    // const vShapeFaces = [
+    //     0, 1, 2,
+    //     0, 2, 3,
+    //     0, 3, 4,
+    //     0, 4, 5
+    // ];
     useFrame(({ clock }) => {
         const time = clock.getElapsedTime() / 1000;
         // meshRef.current!.rotation.y = time;
-        const box = new THREE.Box3().setFromObject(meshRef.current);
-        const center = new THREE.Vector3();
+        const box = new Box3().setFromObject(meshRef.current);
+        const center = new Vector3();
         box.getCenter(center);
         meshRef.current!.position.sub(center);
         meshRef.current!.rotation.y += .01; // Example rotation
@@ -41,14 +42,14 @@ const VModel: React.FC = () => {
         // meshRef.current!.rotation.z = time;
     });
 
-    const extrudeSettings = {
-        steps: 2,
-        depth: 1,
-        bevelEnabled: true,
-        bevelThickness: 0.1,
-        bevelSize: 0.1,
-        bevelSegments: 1
-    };
+    // const extrudeSettings = {
+    //     steps: 2,
+    //     depth: 1,
+    //     bevelEnabled: true,
+    //     bevelThickness: 0.1,
+    //     bevelSize: 0.1,
+    //     bevelSegments: 1
+    // };
     const loader = new FontLoader();
     // const geometry = new THREE.BufferGeometry();
     // geometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(vShapePoints), 3));
@@ -56,7 +57,7 @@ const VModel: React.FC = () => {
     
     loader.load('/helvetiker_regular.typeface.json', function ( font ) {
 
-        const geometry = new TextGeometry( 'V', {
+        const geometry = new TextGeometry( 'J', {
             font: font,
             size: 25,
             height: 10,

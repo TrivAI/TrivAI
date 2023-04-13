@@ -1,10 +1,13 @@
 export default function Layout({
   children,
+  params
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
+  params: any;
 }) {
-  const SIZE =64;
+  const SIZE =64;  
   return (
+
     <div className="">
         <h1 className="mb-4 p-2 gray-blackGradient flex justify-center lg:justify-start" aria-label="Quiz">
             {/* Q */}

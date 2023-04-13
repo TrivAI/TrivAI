@@ -8,27 +8,35 @@ import { useStore } from '../../../src/store';
 
 
 export default function ClientPokemon() {
+    const id = Math.floor(Math.random() * 898) + 1;
     const reveal = {
         yes: "brightness-100",
         no: "brightness-0"
     } 
     const [pokemon, setPokemon] = useState<any>({});
     const [brightness, setBrightness] = useState<number>(0);
-    const id = Math.floor(Math.random() * 898) + 1;
+    
     const { totalScore, name, incrementScore, cheatUsed } = useStore(
       (state) => state
     );
     
     useEffect(() => {
+      try {
         fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
-            .then(res => res.json())
-            .then(data => {
-                let name = data!.name;
-                let sprite = data!.sprites.other['official-artwork']['front_default'];
-                console.log(sprite);
-                setPokemon({pokemonName: name, sprite: sprite});
-            });
-    }, []);    
+          .then((res) => res.json())
+          .then((data) => {
+            let name = data!.name;
+            let sprite =
+              data!.sprites.other["official-artwork"]["front_default"];
+            console.log(sprite);
+            setPokemon({ pokemonName: name, sprite: sprite });
+          });
+      }
+      catch (error) {
+        console.log(error);
+      }
+    }, []);  
+
     return (
       <div className="p-4 flex flex-col justify-center items-center ">
         {!cheatUsed ? <CheatCode /> : ""}
@@ -46,7 +54,7 @@ export default function ClientPokemon() {
         {pokemon && (
           <div className="m-4 flex flex-col">
             <div className="bg-white">
-              {brightness == 0 ? (
+              {brightness === 0 ? (
                 <h1 className="text-3xl">||</h1>
               ) : (
                 <h1 className="text-black text-3xl text-center relative">
