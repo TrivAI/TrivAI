@@ -1,6 +1,7 @@
 'use client';
 import CheatCode from '../CheatCode';
 
+
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import StoreInitializer from '@/app/components/StoreInitializer';
@@ -17,7 +18,10 @@ type MovieQuiz = {
 questions: MovieQuizQuestion[];
 };
 
+(() => {console.log("hi")})();
+
 export default function ClientMovie() {
+  
   const [questions, setQuestions] = useState<MovieQuizQuestion[]>([]);
   const { totalScore, name, incrementScore, cheatUsed } = useStore(
     (state) => state
