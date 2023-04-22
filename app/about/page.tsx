@@ -8,7 +8,7 @@ export default async function Home() {
   // http://worldtimeapi.org/api/timezone/America/Los_Angeles
   const res = await fetch(`http://worldtimeapi.org/api/timezone/America/Los_Angeles`, { next: {revalidate: 5} });
   const data = await res.json();
-  console.log(data.datetime);
+  console.log("thisis the datetime: ",data.datetime);
   
   let num = 0;
   console.log("got pokemon", num++);

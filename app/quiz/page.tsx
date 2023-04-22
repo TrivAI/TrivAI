@@ -7,7 +7,7 @@ export default function Home() {
     
     
     return (
-        <div className="grid grid-cols-2 gap-4 h-screen lg:h-auto">
+        <div className="grid grid-cols-2 gap-4 lg:h-auto">
             { routes.map((route) => {
                 return (
                     <Link className="p-4 border border-slate-500 hover:bg-slate-800" key={route} href={`/quiz/${route}`}>{route}</Link>

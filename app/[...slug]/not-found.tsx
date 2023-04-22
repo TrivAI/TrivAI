@@ -1,6 +1,6 @@
 export default function NotFound() {
   return (
-    <div className="container relative mb-4 bg-purple-900 lg:mb-0" aria-roledescription="404 resource not found">
+    <div className=" container relative mb-4 bg-purple-900 lg:mb-0" aria-roledescription="404 resource not found">
       <div className=" grid grid-flow-col ">
         <div className="errorPage-square"></div>
         <div className="errorPage-square"></div>

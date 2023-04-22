@@ -17,6 +17,8 @@ enum Role {
 }
 
 enum Category {
+  CARS
+  POKEMON
   GENERAL
   SPORTS
   HISTORY
@@ -25,7 +27,7 @@ enum Category {
   SCIENCE
   ART
   MUSIC
-  FILM
+  FILMS
   LITERATURE
   MATHS
   TECHNOLOGY
@@ -76,14 +78,14 @@ model User {
   id            String        @id @default(cuid())
   name          String?
   email         String?       @unique
-  emailVerified String?
+  emailVerified DateTime?
   image         String?
   accounts      Account[]
   sessions      Session[]
   role          Role          @default(USER)
   cheatUsed     Boolean       @default(false)
   cheatUsedAt   DateTime?
-  createdAt     DateTime      
+  createdAt     DateTime      @default(now())      
   updatedAt     DateTime?      
   totalScore    Int           @default(0)
   UserAnswers   UserAnswers[]
@@ -96,14 +98,14 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
- model QuizCategory {
-  id            Int     @id @default(autoincrement())
+model QuizCategory {
+  id            Int       @id @default(autoincrement())
   category      Category  
-  active        Boolean @default(true)
+  active        Boolean   @default(true)
   basePrompt    String
-  createdAt     DateTime
-  isActive      Boolean @default(true)
- }
+  createdAt     DateTime  @default(now())
+  isActive      Boolean   @default(true)
+}
 model KeywordPrompt {
   id            Int         @id @default(autoincrement())
   keyword       String
@@ -129,7 +131,7 @@ model Question {
   correctAnswer String
   createdAt     DateTime      @default(now())
   updatedAt     DateTime?      
-  dateDue       DateTime      
+  dateDue       String
   image         String
 }
 model AllAnswers {

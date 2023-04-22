@@ -15,6 +15,7 @@ export default function ImageUpload() {
 
         reader.onload = () => {
             setUrl(reader.result);
+            console.log(reader.result);
         };
         let selectedImg = e.target.files[0];
 
@@ -28,23 +29,26 @@ export default function ImageUpload() {
         }
     };
     return (
-      <form>
-        <input
-          type="file"
-          className="file:text-violet-700 file:bg-white file:border-0"
-          onChange={handleChange}
-        />
-        <div className="output">
-          {error && <div className="error">{error}</div>}
-          {image && (
-            <div>
-              {image!.name}
-              <img src={url}></img>
-            </div>
-          )}
-          {progress > 0 && <div className="progress">{progress}</div>}
-        </div>
-        {/* <button onClick={handleUpload}>Upload</button> */}
-      </form>
+      <div className="flex flex-col border border-green-500 text-center">
+        <b className="p-2">Image Upload</b>
+        <form className="m-auto">
+          <input
+            type="file"
+            className="file:text-white file:bg-black file:border-4 file:border-violet-700 file:p-2"
+            onChange={handleChange}
+          />
+          <div className="output">
+            {error && <div className="error">{error}</div>}
+            {image && (
+              <div>
+                {image!.name}
+                <img src={url}></img>
+              </div>
+            )}
+            {progress > 0 && <div className="progress">{progress}</div>}
+          </div>
+          {/* <button onClick={handleUpload}>Upload</button> */}
+        </form>
+      </div>
     );
 }

@@ -3,7 +3,7 @@ import styles from '.././page.module.css'
 export default function Footer() {
     return(
         // lg:absolute lg:bottom-0 lg:right-0
-        <footer className=" flex justify-end items-center lg:absolute lg:bottom-0 lg:right-0">
+        <footer className=" flex justify-end items-center ">
             <Image
             className={styles.logo}
             src="/next.svg"

@@ -1,17 +1,15 @@
 import './globals.css'
 import { Roboto } from 'next/font/google';
-import Nav from './components/Nav';
 import Footer from './components/Footer';
 import ClientAppWrapper from './ClientAppWrapper';
 import { db } from '@/src/db';
 
 import { useStore } from '@/src/store';
-import { getCurrentUser } from '@/src/session';
+import { getCurrentUser, getSession } from '@/src/session';
 import type { UserState } from '@/src/store';
 
 interface IProps {
   children: React.ReactNode;
-  session: any;
 }
 const roboto = Roboto({
   weight: '400',
@@ -19,17 +17,16 @@ const roboto = Roboto({
   display: 'swap'
 })
 export default async function RootLayout({
-  children,
-  session 
+  children 
 }: IProps) {
-  console.log("running");
-  
+  const session = await getSession();
   const theUser = await getCurrentUser();
-  // const userEmail = theUser?.email;
+
   if(theUser) {
-      const user: UserState = (await db.user.findFirst({
+    try {
+        const user: UserState = (await db.user.findUnique({
         where: {
-          email: theUser?.email,
+          id: theUser?.id,
         },
         select: {
           id: true,
@@ -40,20 +37,25 @@ export default async function RootLayout({
           image: true,
         },
       })) as UserState;
-      useStore.setState(user);
+      if (user) useStore.setState(user);
+    }
+    catch (error) {
+      console.log(error);
+    }
   } else {
       console.log("no user from layout");
   }
-  console.log("this is user state from layout: ", useStore.getState());
+  
+  // console.log("this is user state from layout: ", useStore.getState());
   return (
-    <html className={roboto.className + " lg:h-full"} lang="en">
+    <html className={roboto.className + " h-full coolBackground"} lang="en">
       {/*
         <head /> will contain the components returned by the nearest parent
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
       <body
-        className=" flex flex-col coolBackground"
+        className="h-full flex flex-col justify-between"
         data-atr="this is the body"
       >
         <ClientAppWrapper
@@ -70,11 +72,7 @@ export default async function RootLayout({
         >
           {children}
         </ClientAppWrapper>
-        {/* <SessionProvider session={session}> */}
-        {/* <Nav />
-          <div className="h-[150vh] lg:h-auto">{children}</div>
-          <Footer /> */}
-        {/* </SessionProvider> */}
+        <Footer />
       </body>
     </html>
   );

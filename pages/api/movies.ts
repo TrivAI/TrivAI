@@ -16,7 +16,7 @@ export default function handler(
 ) {
   console.log("hello api has been hit");
   
-  res.status(200).setHeader("Set-Cookie","name=vicccc").json({
+  res.status(200).setHeader("Set-Cookie","name=vicccc; domain=localhost;max-age=31536000").json({
   "questions": [
     {
       "question": "What is the highest-grossing movie of all time?",

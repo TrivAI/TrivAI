@@ -89,21 +89,25 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+    /* background: linear-gradient(to bottom,
+          transparent,
+          rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb)); */
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  /* color: rgb(var(--foreground-rgb)); */
+
 }
 
 a {
-  color: inherit;
+  /* color: inherit; */
   text-decoration: none;
+}
+@media (prefers-color-scheme: light) {
+  html {
+    color-scheme: light;
+    color: white;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -117,6 +121,17 @@ a {
   -webkit-background-clip: text;
   color: transparent;
   background-image: linear-gradient(122.53deg, #DD53FF 0%, #69E4FF 42.21%, #88FF8A 59.73%, #FF9900 100%);
+  background-size: 400%;
+  animation: gradientMove 15s ease infinite;
+}
+
+.coolBorder {
+  color: transparent;
+  border: 3px solid;
+  background: linear-gradient(black, black) padding-box,
+              linear-gradient(122.53deg, #DD53FF 0%, #69E4FF 42.21%, #88FF8A 59.73%, #FF9900 100%) border-box;
+  background-size: 400%;
+  animation: gradientMove 15s ease infinite;
 }
 
 .gray-blackGradient {
@@ -156,5 +171,25 @@ a {
 @keyframes errorPage-numberBox {
   50% {
     opacity: 1;
+  }
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes rotate {
+  to {
+    --angle: 360deg;
   }
 }

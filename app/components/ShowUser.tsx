@@ -1,20 +1,15 @@
 "use client";
-import { useSession } from "next-auth/react";
 
-export default function ShowUser() {
-    const { data: session, status,  } = useSession();
-    if (status === 'authenticated')  {
+export default function ShowUser( { role, name } : {role: string | undefined | null; name: string | undefined | null; }) {
+    if (role)  {
         return (
             <>
             ,
             <div className="text-blue-500">
-                <p className="text-2xl">{session && session.user ? session.user.name?.toUpperCase() : "" }</p>
+                <p className="text-2xl">{name?.toUpperCase()}</p>
             </div>
             </>
         )
     }
-    return(
-        <>
-        </>
-    );
+    return(null);
 }

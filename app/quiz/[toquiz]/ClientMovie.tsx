@@ -28,6 +28,7 @@ export default function ClientMovie() {
   );
 
   useEffect(() => {
+    console.log(document.cookie);
     try {
       fetch("/api/movies")
       .then((res) => res.json())
