@@ -1,5 +1,5 @@
 "use client";
-
+import Image from "next/image";
 import { useState, useLayoutEffect, useEffect } from "react";
 
 export default function ImageUpload() {
@@ -42,7 +42,7 @@ export default function ImageUpload() {
             {image && (
               <div>
                 {image!.name}
-                <img src={url}></img>
+                <Image src={url} alt="image" width={500} height={500} />
               </div>
             )}
             {progress > 0 && <div className="progress">{progress}</div>}

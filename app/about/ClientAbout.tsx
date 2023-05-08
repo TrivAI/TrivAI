@@ -26,10 +26,9 @@ async function sendForm(obj : any) {
 // function shakeAnimation
 
 export default function ClientAbout() {
-    const { totalScore, name, incrementScore } = useStore((state) => state);
-    const [nameForm, setNameForm] = useState("");
     const [hasSubmit, setHasSubmit] = useState(false);
     const [error, setError] = useState(false);
+    const [message, setMessage] = useState("");
     const submitForm = async (e : any) =>{
       e.preventDefault();
       setError(false);
@@ -45,6 +44,7 @@ export default function ClientAbout() {
         setError(true);
         return;
       }
+      setMessage(response.feedback);
       setHasSubmit(true);
       e.target.reset();
     }
@@ -59,7 +59,6 @@ export default function ClientAbout() {
             (error ? "border-red-400 border-4" : "")
           }
           onSubmit={submitForm}
-          // ref={(node) => console.log(node)}
         >
           <label className="flex m-4 items-center justify-between">
             <span>Name:</span>
@@ -69,7 +68,7 @@ export default function ClientAbout() {
               name="name"
               disabled={false}
               placeholder="Dude Bro"
-              
+              required
             />
           </label>
           <label className="flex m-4 items-center justify-between">
@@ -91,6 +90,7 @@ export default function ClientAbout() {
               name="message"
               disabled={false}
               placeholder="This thing sucks..."
+              maxLength={150}
               required
             />
           </label>
@@ -101,6 +101,7 @@ export default function ClientAbout() {
             Submit
           </button>
         </form>
+        {message.length > 0 ? <p>Your Message: {message}</p> : <p></p>}
       </div>
     );
 }

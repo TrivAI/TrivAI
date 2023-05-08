@@ -5,43 +5,94 @@ export type UserState = {
     id: string;
     name: string;
     totalScore: number;
-    role: string;
     image: string;
-    cheatUsed?: any;
+    cheatUsed: boolean;
 }
 
 export type Actions = {
-    initCheat: (cheat: string) => void;
-    incrementScore: () => void;
+    incrementScore: (pointAmount : number) => void;
     removeCheat: () => void;
+    resetScore: () => void;
+    deleteAccount: () => void;
 }
 
+const initialState: UserState = {
+  id: "",
+  name: "",
+  totalScore: 0,
+  image: "",
+  cheatUsed: false,
+}
 
 export const useStore = create<UserState & Actions>((set, get) => ({
+    ...initialState,
     id: '',
     name: '',
     totalScore: 0,
-    role: '',
     cheatUsed: false,
     image: '',
-    pokemon: [],
-    movies: [],
-    games: [],
-    cars: [],
-    geography: [],
-    initCheat: (cheat: string) => {
-        set({cheatUsed: cheat});
+    incrementScore: async (pointAmount) => {
+        const response = await fetch(new URL("/api/score", checkEnvironment()), {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({id: get().id, totalScore: get().totalScore + pointAmount})
+        });
+        if (!response.ok) {
+            throw new Error(response.statusText);
+        }
+        let score = await response.json().then(data => data.totalScore); 
+        set({totalScore: score});
     },
-    incrementScore: () => set(state  =>({ totalScore: state.totalScore + 1 })),
     removeCheat: async () => {
         const response = await fetch(new URL("/api/cheat", checkEnvironment()), {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({id: get().id, cheatUsed: get().cheatUsed})
         });
-        set({cheatUsed: response.json().then(data => data.cheatUsed)});
+        if (!response.ok) {
+            throw new Error(response.statusText);
+        } 
+        set({cheatUsed: await response.json().then(data => data.cheatUsed)});
+    },
+    resetScore: async () => {
+        let response; 
+        try {
+            response = await fetch(new URL("/api/resetScore", checkEnvironment()), {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({id: get().id, totalScore: 0})
+            });
+            if (!response.ok) {
+                throw new Error(response.statusText);
+            }  
+            set({totalScore: await response.json().then(data => data.totalScore)});
+        }
+        catch(e) {
+            alert("Nextwork Error");
+            console.log(e);
+        }
+    },
+    deleteAccount: async () => {
+        let response; 
+        try {
+            response = await fetch(new URL(`/api/delete/${get().id}`, checkEnvironment()), {
+                method: 'DELETE',
+            });
+            if (!response.ok) {
+                throw new Error(response.statusText);
+            }  
+            set(initialState);      
+        }
+        catch(e) {
+            alert("Nextwork Error");
+            console.log(e);
+        }
     }
 }));
 

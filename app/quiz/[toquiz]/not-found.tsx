@@ -1,6 +1,6 @@
 export default function NotFound() {
   return (
-    <div className="container relative mb-4 bg-purple-900 lg:mb-0">
+    <div className="container relative mx-auto mb-4 bg-purple-900 lg:mb-0">
         <div className=" grid grid-flow-col ">
             <div className="errorPage-square"></div>
             <div className="errorPage-square"></div>

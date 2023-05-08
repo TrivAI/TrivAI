@@ -10,6 +10,12 @@ const nextConfig = {
         port: '443',
         pathname: '/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'storage.googleapis.com',
+        port: '',
+        pathname: '/trivai-images/**',
+      }
     ],
   },
   experimental: {

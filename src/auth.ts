@@ -33,10 +33,9 @@ export const authOptions: NextAuthOptions = {
             // Persist the OAuth access_token to the token right after signin
             // account is only passed once after a new user signs in
             if (account) {
-                console.log("this is the token from jwt:", token);
-                const { sub } = token;
+                const { sub } = token; // sub is the user id in the database
                 token.accessToken = account.access_token
-                // getting role so only admins can hit admin API endpoint
+                // getting role so only admins can hit admin API endpoints
                 const userRole = await getUserRole(sub as string);
                 token.role = userRole;
                 token.id = sub;

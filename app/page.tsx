@@ -4,7 +4,7 @@ import { Inter } from '@next/font/google'
 
 const inter = Inter({ subsets: ['latin'] })
 
-console.log("hi from server");
+
 
 
 const rows = [

@@ -140,7 +140,7 @@ a {
 
 
 .coolBackground {
-  background: linear-gradient(0deg, transparent 0, #000000 800px), 
+  background: linear-gradient(0deg, transparent 0, #000000 500px), 
               fixed 0 0 /20px 20px radial-gradient(#9c43d8 1px, transparent 0), 
               fixed 10px 10px /20px 20px radial-gradient(#594c4c 1px, #000 0);
 }
@@ -192,4 +192,12 @@ a {
   to {
     --angle: 360deg;
   }
+}
+ 
+next-route-announcer {
+  position: absolute;
+}
+
+.table th:first-child {
+  position: relative;
 }
