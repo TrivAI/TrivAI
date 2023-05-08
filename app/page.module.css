@@ -113,7 +113,15 @@
     filter: invert(1) drop-shadow(0 0 0.3rem #ffffff70);
   }
 }
-
+@media (prefers-color-scheme: light) {
+  .vercelLogo {
+    filter: invert(1);
+  }
+  .logo,
+  .thirteen  {
+    filter: invert(1) drop-shadow(0 0 0.3rem #ffffff70);
+  }
+}
 @keyframes rotate {
   from {
     transform: rotate(360deg);

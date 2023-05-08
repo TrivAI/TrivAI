@@ -5,9 +5,20 @@ import ClientAppWrapper from './ClientAppWrapper';
 import { db } from '@/src/db';
 import { getCurrentUser, getSession } from '@/src/session';
 import type { UserState } from '@/src/store';
-import { SessionProvider, useSession } from "next-auth/react";
-import StoreInitializer from "./components/StoreInitializer";
-import Nav from "./components/Nav";
+import { Analytics } from "@vercel/analytics/react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "TrivAI",
+  description:
+    "A trivia website based on stable diffusion image generation," + 
+    " is an online platform that challenges users to guess what abstract" + 
+    " and distorted images represent, using a process called stable diffusion." + 
+    " It can be a fun and engaging way for people to test their observation skills" +
+    " and improve their cognitive abilities.",
+};
+ 
+
 
 
 interface IProps {
@@ -66,6 +77,7 @@ export default async function RootLayout({
           {children}
         </ClientAppWrapper>
         <Footer />
+        <Analytics />
       </body>
     </html>
   );

@@ -6,11 +6,12 @@ import ShowUser from "./ShowUser";
 import Starfield from './StarField';
 
 export default function Nav() {
-    const { data: session, status } = useSession();
+    const { data: session } = useSession();
     const [compoentWidth, setComponentWidth] = useState<number>(0);
     const [componentHeight, setComponentHeight] = useState<number>(0);
     const currentRef = useRef<HTMLElement>(null);
-
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    // const 
 
     // useEffect(() => {
     //   const handleResize = () => {
@@ -74,9 +75,11 @@ export default function Nav() {
                 </Link>
                 <button
                   className="coolBorder py-2 px-4  "
-                  onClick={() =>
-                    signOut({ callbackUrl: `/` })
-                  }
+                  onClick={() => {
+                    signOut({ callbackUrl: `/` });
+                    setIsLoading(true);
+                  }}
+                  disabled={isLoading === true}
                 >
                   {" "}
                   <b className="coolText">SIGN OUT</b>
@@ -97,8 +100,12 @@ export default function Nav() {
                   <b>ABOUT</b>
                 </Link>
                 <button
-                  className="coolBorder py-2 px-4 "
-                  onClick={() => signIn()}
+                  className="coolBorder py-2 px-4"
+                  onClick={() => {
+                    signIn();
+                    setIsLoading(true);
+                  }}
+                  disabled={isLoading === true}
                 >
                   {" "}
                   <b className="coolText"> SIGN IN </b>

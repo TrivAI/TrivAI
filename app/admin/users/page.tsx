@@ -1,5 +1,5 @@
 import { db } from "@/src/db";
-import ClientUsers from "./ClientUsers";
+import Table from "@/app/components/Table";
 
 async function getUsers() {
     return await db.user.findMany({
@@ -15,13 +15,11 @@ async function getUsers() {
 }
 
 export default async function Page() {
+    const usersHead = ["ID", "Email", "Name", "Role", "Cheat Used", "Total Score"];
     const users = await getUsers();
     return (
       <main>
-        <h1 className="text-3xl m-4 px-4">
-          <b>Users</b>
-        </h1>
-        <ClientUsers users={users} />
+        <Table title="Users" data={users} thead={usersHead} />
       </main>
     );
 }

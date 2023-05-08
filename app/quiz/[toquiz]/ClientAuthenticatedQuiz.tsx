@@ -84,9 +84,7 @@ export default function ClientAuthenticatedQuiz({
     setQuestions(questions.slice(1));
     router.refresh();
   };
-  useEffect(()=> {
-    localStorage.setItem("questions", JSON.stringify(activeQuestions));
-  });
+
   useEffect(() => {
     setAnswers(shuffle([answer1, answer2, answer3, answer4]));
     buttonFocusRef.current?.focus();

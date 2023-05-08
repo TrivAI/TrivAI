@@ -13,7 +13,7 @@ export default function Footer() {
             priority
             />
             <div className={styles.thirteen}>
-            <Image src="/thirteen.svg" alt="13" width={30} height={30} priority />
+                <Image src="/thirteen.svg" alt="13" width={30} height={30} priority />
             </div>
             <a
             href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
