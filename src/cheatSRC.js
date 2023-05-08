@@ -1,5 +1,5 @@
 "use strict"; 
-let jsCheat = (function () {
+export const jsCheat = (function () {
     // Object.assign MDN's Polyfill
     if (typeof Object.assign != 'function') {
         Object.assign = function (target, varArgs) { // .length of function is 2
@@ -117,4 +117,5 @@ let jsCheat = (function () {
         controller
     }
 })();
-export default jsCheat;
+
+//export jsCheat;

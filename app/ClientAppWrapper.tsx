@@ -1,19 +1,20 @@
 "use client";
 
 import { SessionProvider, useSession } from "next-auth/react";
-import Footer from "./components/Footer";
 import StoreInitializer from "./components/StoreInitializer";
 import Nav from "./components/Nav";
+import { UserState } from "@/src/store";
 
 
-export default function ClientAppWrapper({ children, session, user }: any) {
+export default function ClientAppWrapper({ children, session, user }: {children: React.ReactNode, session: any; user: UserState;}) {
     
     return (
-        <SessionProvider session={session}>
-            {user ? <StoreInitializer user={user}/> : ""}
-            <Nav />
-            <div className="h-[150vh] lg:h-auto">{children}</div>
-            <Footer />
-        </SessionProvider>
-    )
+      <SessionProvider session={session}>
+        {user ? <StoreInitializer user={user} /> : ""}
+        <span>
+          <Nav />
+          <div data-main="Main Client Div" className="">{children}</div>
+        </span>
+      </SessionProvider>
+    );
 }

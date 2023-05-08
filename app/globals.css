@@ -89,21 +89,25 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
+    /* background: linear-gradient(to bottom,
+          transparent,
+          rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb)); */
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  /* color: rgb(var(--foreground-rgb)); */
+
 }
 
 a {
-  color: inherit;
+  /* color: inherit; */
   text-decoration: none;
+}
+@media (prefers-color-scheme: light) {
+  html {
+    color-scheme: light;
+    color: white;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -117,7 +121,26 @@ a {
   -webkit-background-clip: text;
   color: transparent;
   background-image: linear-gradient(122.53deg, #DD53FF 0%, #69E4FF 42.21%, #88FF8A 59.73%, #FF9900 100%);
+  background-size: 400%;
+  animation: gradientMove 15s ease infinite;
 }
+
+.coolBorder {
+  color: transparent;
+  border: 3px solid;
+  background: linear-gradient(black, black) padding-box,
+              linear-gradient(122.53deg, #DD53FF 0%, #69E4FF 42.21%, #88FF8A 59.73%, #FF9900 100%) border-box;
+  background-size: 400%;
+  animation: gradientMove 15s ease infinite;
+}
+/* .coolBorder:hover {
+  color: black;
+  border: 3px solid;
+  background: linear-gradient(122.53deg, #DD53FF 0%, #69E4FF 42.21%, #88FF8A 59.73%, #FF9900 100%) padding-box,
+              linear-gradient(black, black) padding-box;
+  background-size: 400%;
+  animation: gradientMove 15s ease infinite;
+} */
 
 .gray-blackGradient {
   background-image: linear-gradient(90deg, #334155 65%, #000);
@@ -125,7 +148,7 @@ a {
 
 
 .coolBackground {
-  background: linear-gradient(0deg, transparent 0, #000000 800px), 
+  background: linear-gradient(0deg, transparent 0, #000000 500px), 
               fixed 0 0 /20px 20px radial-gradient(#9c43d8 1px, transparent 0), 
               fixed 10px 10px /20px 20px radial-gradient(#594c4c 1px, #000 0);
 }
@@ -157,4 +180,32 @@ a {
   50% {
     opacity: 1;
   }
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes rotate {
+  to {
+    --angle: 360deg;
+  }
+}
+ 
+next-route-announcer {
+  position: absolute;
+}
+
+.table th:first-child {
+  position: relative;
 }

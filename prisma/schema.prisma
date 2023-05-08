@@ -17,6 +17,8 @@ enum Role {
 }
 
 enum Category {
+  CARS
+  POKEMON
   GENERAL
   SPORTS
   HISTORY
@@ -25,7 +27,7 @@ enum Category {
   SCIENCE
   ART
   MUSIC
-  FILM
+  FILMS
   LITERATURE
   MATHS
   TECHNOLOGY
@@ -76,14 +78,14 @@ model User {
   id            String        @id @default(cuid())
   name          String?
   email         String?       @unique
-  emailVerified String?
+  emailVerified DateTime?
   image         String?
   accounts      Account[]
   sessions      Session[]
   role          Role          @default(USER)
   cheatUsed     Boolean       @default(false)
   cheatUsedAt   DateTime?
-  createdAt     DateTime      
+  createdAt     DateTime      @default(now())      
   updatedAt     DateTime?      
   totalScore    Int           @default(0)
   UserAnswers   UserAnswers[]
@@ -96,55 +98,59 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
- model QuizCategory {
-  id            Int     @id @default(autoincrement())
+model QuizCategory {
+  id            Int       @id @default(autoincrement())
   category      Category  
-  active        Boolean @default(true)
   basePrompt    String
-  createdAt     DateTime
-  isActive      Boolean @default(true)
- }
+  sdPrompt      String    @default(" ")
+  createdAt     DateTime  @default(now())
+  isActive      Boolean   @default(true)
+}
 model KeywordPrompt {
   id            Int         @id @default(autoincrement())
   keyword       String
   category      Category
-  used          Boolean     @default(false)
+  isUsed         Boolean     @default(false)
 }
 
 model QuestionData {
   id            Int         @id @default(autoincrement())
   category      Category
-  used          Boolean     @default(false)
-  createdAt     DateTime    
-  answer        String
+  isUsed        Boolean     @default(false)
+  createdAt     DateTime    @default(now())
+  correctAnswer String
 }
+
 model Question {
   id            String        @id @default(cuid())
-  description   String
   category      Category
-  stale         Boolean       @default(false)
+  isUsed        Boolean       @default(false)
   answer1       String
   answer2       String
   answer3       String
   correctAnswer String
   createdAt     DateTime      @default(now())
   updatedAt     DateTime?      
-  dateDue       DateTime      
+  dateDue       String
   image         String
 }
-model AllAnswers {
-  id          Int    @id  @default(autoincrement())
-  category    Category
-  answer      String
-}
+
 model UserAnswers {
-  id             String   @id @default(cuid())
+  id             String       @id @default(cuid())
   userId         String
   questionId     String
   selectedAnswer String
   createdAt      DateTime     @default(now())
-
-  user     User     @relation(fields: [userId], references: [id])
+  category       Category
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   @@index([userId])
   @@index([questionId])
+}
+
+model Feedback {
+  id             Int          @id @default(autoincrement())
+  name           String
+  email          String
+  message        String
+  createdAt      DateTime     @default(now())
 }

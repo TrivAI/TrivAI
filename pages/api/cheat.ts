@@ -13,7 +13,7 @@ export default async function handler(
 ) 
 {
     switch (req.method) {
-        case 'POST': {
+        case 'PUT': {
             let data : Cheat = req.body;
             const { id, cheatUsed } = await db.user.update({
                 where: {

@@ -4,21 +4,23 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.5",
-    "@next/font": "13.1.6",
-    "@prisma/client": "^4.12.0",
+    "@next/font": "^13.3.1",
+    "@prisma/client": "^4.13.0",
     "@react-three/fiber": "^8.12.0",
     "@types/node": "18.13.0",
     "@types/react": "18.0.28",
     "@types/react-dom": "18.0.10",
     "@types/three": "^0.149.0",
+    "@vercel/analytics": "^1.0.1",
     "daisyui": "^2.50.1",
-    "next": "^13.3.0",
+    "next": "^13.3.1",
     "next-auth": "^4.20.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -34,7 +36,7 @@
     "eslint": "^8.36.0",
     "eslint-config-next": "^13.2.4",
     "postcss": "^8.4.21",
-    "prisma": "^4.12.0",
+    "prisma": "^4.13.0",
     "tailwindcss": "^3.2.6"
   }
 }

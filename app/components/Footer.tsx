@@ -3,7 +3,7 @@ import styles from '.././page.module.css'
 export default function Footer() {
     return(
         // lg:absolute lg:bottom-0 lg:right-0
-        <footer className=" flex justify-end items-center lg:absolute lg:bottom-0 lg:right-0">
+        <footer className=" flex justify-end items-center ">
             <Image
             className={styles.logo}
             src="/next.svg"
@@ -13,7 +13,7 @@ export default function Footer() {
             priority
             />
             <div className={styles.thirteen}>
-            <Image src="/thirteen.svg" alt="13" width={30} height={30} priority />
+                <Image src="/thirteen.svg" alt="13" width={30} height={30} priority />
             </div>
             <a
             href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"

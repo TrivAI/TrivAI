@@ -5,31 +5,21 @@ import { Box3, Vector3} from 'three';
 import type { Mesh } from 'three';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
+import { useSession } from 'next-auth/react';
 // import fontJson from '../../public/helvetiker_regular.typeface.json';
 
 // const font = new THREE.Font(fontJson);
 
-const VModel: React.FC = () => {
-
-
-  const V : React.FC = () => {
+function LetterModel() {
+  const {data: session} = useSession();
+  let userFirstLetter : string;
+    if (session?.user.name) {
+        userFirstLetter = session?.user.name[0];
+    } else {
+        userFirstLetter = 'T';
+    }
+  const Letter : React.FC = () => {
     const meshRef = useRef<Mesh>(null!);
-    // const vShapePoints = [
-    //     0, 0, 0,
-    //     -1, 1, 0,
-    //     -0.5, 1, 0,
-    //     0, 0.5, 0,
-    //     0.5, 1, 0,
-    //     1, 1, 0,
-    //     0, 0, 0
-    // ];
-
-    // const vShapeFaces = [
-    //     0, 1, 2,
-    //     0, 2, 3,
-    //     0, 3, 4,
-    //     0, 4, 5
-    // ];
     useFrame(({ clock }) => {
         const time = clock.getElapsedTime() / 1000;
         // meshRef.current!.rotation.y = time;
@@ -42,35 +32,23 @@ const VModel: React.FC = () => {
         // meshRef.current!.rotation.z = time;
     });
 
-    // const extrudeSettings = {
-    //     steps: 2,
-    //     depth: 1,
-    //     bevelEnabled: true,
-    //     bevelThickness: 0.1,
-    //     bevelSize: 0.1,
-    //     bevelSegments: 1
-    // };
     const loader = new FontLoader();
-    // const geometry = new THREE.BufferGeometry();
-    // geometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(vShapePoints), 3));
-    // geometry.setIndex(vShapeFaces);
     
     loader.load('/helvetiker_regular.typeface.json', function ( font ) {
 
-        const geometry = new TextGeometry( 'J', {
-            font: font,
-            size: 25,
-            height: 10,
-            curveSegments: 3,
-            bevelEnabled: true,
-            bevelThickness: 0,
-            bevelSize: 1,
-            bevelOffset: 0,
-            bevelSegments: 1
-        } );
+        const geometry = new TextGeometry(`${userFirstLetter}`, {
+          font: font,
+          size: 25,
+          height: 10,
+          curveSegments: 3,
+          bevelEnabled: true,
+          bevelThickness: 0,
+          bevelSize: 1,
+          bevelOffset: 0,
+          bevelSegments: 1,
+        });
         meshRef.current.geometry = geometry;
     } );
-
 
     return (
         <group position={[0, -20, 0]} >
@@ -85,12 +63,15 @@ const VModel: React.FC = () => {
 
 
   return (
-    <Canvas style={{margin:"auto", width: 150, height: 150, position: 'absolute' }} camera={{ position: [50, 0, 10] }}>
-        <ambientLight intensity={0.5} />
-        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
-        <V />
+    <Canvas
+      style={{ margin: "auto", width: 350, height: 350 }}
+      camera={{ position: [50, 0, 10] }}
+    >
+      <ambientLight intensity={0.5} />
+      <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
+      <Letter />
     </Canvas>
   );
 };
 
-export default VModel;
+export default React.memo(LetterModel);
