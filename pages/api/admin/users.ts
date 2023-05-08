@@ -43,20 +43,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                             name: name,
                             role: role,
                             cheatUsed: cheatUsed,
-                            totalScore: totalScore
+                            totalScore: parseInt(totalScore)
                         }
                     });
                 } else {
-                    await db.user.create({
-                        data: {
-                            id: randomStringWithSameLength(),
-                            email: email,
-                            name: name,
-                            role: role,
-                            cheatUsed: cheatUsed,
-                            totalScore: totalScore 
-                        }
-                    });
+                    res.status(404).json({message: "Not Found"});
                 }
                 res.status(200).json({message: "Success"});
                 return;
