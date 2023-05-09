@@ -3,12 +3,9 @@ import { db } from "@/src/db";
 import Image from "next/image";
 const routes = [ "Pokemon", "Movies", "Games", "Geography", "Cars"];
 
-function getDueDate(daysInAdvance : number = 0) {
-  const date = new Date();
-  const month = date.getMonth() + 1;
-  const day = date.getDate() + daysInAdvance;
-  const year = date.getFullYear();
-  return `${month}/${day}/${year}`;
+function getDueDate() {
+  let timeZoneOffset = new Date().getTimezoneOffset() * 60000;
+  return new Date(Date.now() - timeZoneOffset).toLocaleDateString();
 }
 
 async function getEachFirstActiveQuestionByCategory() {
@@ -28,7 +25,7 @@ async function getEachFirstActiveQuestionByCategory() {
     let question = await db.question.findFirst({
       where: {
         category: category,
-        dateDue: getDueDate(1),
+        dateDue: getDueDate(),
       },
       select: {
         image: true,

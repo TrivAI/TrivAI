@@ -76,7 +76,7 @@ export default function ClientUnauthenticatedQuiz({
                 return (
                   <button
                     ref={index === 0 ? buttonFocusRef : null}
-                    className="border border-blue-500 text-blue-500 m-2 p-2 hover:bg-blue-500 hover:text-black focus:ring focus:ring-green-500"
+                    className="border border-blue-500 text-blue-500 m-2 p-2 hover:bg-blue-500 hover:text-black"
                     key={index}
                     onClick={() => handleClick(answer)}
                   >
