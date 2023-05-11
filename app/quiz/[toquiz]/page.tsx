@@ -10,6 +10,12 @@ interface Routes {
   [key: string]: JSX.Element;
 }
 
+function getDueDate() {
+  let timeZoneOffset = new Date().getTimezoneOffset() * 60000;
+  return new Date(Date.now() - timeZoneOffset).toLocaleDateString();
+}
+
+
 function flattenObjectToStringArray(array: any[]) {
   return array.map((item) => item[Object.keys(item)[0]].toLowerCase() );
 }
@@ -50,7 +56,7 @@ async function getActiveQuestionsByCategoryForUser(category: string, userId: str
     where: {
       category: category.toUpperCase() as any,
       // change when ready to go live to 0
-      dateDue: getDate(1),
+      dateDue: getDueDate(),
     },
     select: {
       image: true,

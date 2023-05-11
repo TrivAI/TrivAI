@@ -38,6 +38,8 @@ async function getEachFirstActiveQuestionByCategory() {
 }
 
 export default async function Home() {
+  console.log(getDueDate());
+  
     let questions = await getEachFirstActiveQuestionByCategory();
     
     if (questions.length === 0) {
