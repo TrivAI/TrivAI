@@ -96,7 +96,7 @@ export default function ClientAbout() {
           </label>
           <button
             type="submit"
-            className="border border-blue-500 p-2 m-4 hover:bg-blue-500 hover:text-black"
+            className="border border-blue-500 p-2 m-4 lg:hover:bg-blue-500 lg:hover:text-black"
           >
             Submit
           </button>

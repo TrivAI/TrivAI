@@ -9,6 +9,8 @@ async function getUsersAnswers(userId: string) {
         },
         select: {
             questionId: true,
+            selectedAnswer: true,
+            category: true,
         },
     });
 }
@@ -23,11 +25,16 @@ export default async function User() {
       <main>
         {user ? (
           <>
-            <h1 className="text-3xl text-center">Results</h1>
-            <div>
+            <h1 className="text-3xl text-center m-6">Results</h1>
+            <div className="m-auto grid gap-2 grid-cols-1 md:gap-4 md:grid-cols-3 lg:gap-6 lg:grid-cols-4 w-max">
               {usersAnswers.map((answer, index) => (
-                <div key={answer.questionId}>
-                  <p>{answer.questionId}</p>
+                <div className="border border-blue-500 p-2" key={answer.questionId}>
+                  <p>Question ID:</p>
+                  <p className="mb-2">{answer.questionId}</p>
+                  <p>Selected Answer:</p>
+                  <p className="mb-2">{answer.selectedAnswer}</p>
+                  <p>Category:</p>
+                  <p className="mb-2">{answer.category}</p>
                 </div>
               ))}
             </div>

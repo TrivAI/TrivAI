@@ -7,6 +7,11 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from "next/navigation";
 // import QuestionOptions from '@/app/components/QuestionOptions';
 
+function getDueDate() {
+  let timeZoneOffset = new Date().getTimezoneOffset() * 60000;
+  return new Date(Date.now() - timeZoneOffset).toLocaleDateString();
+}
+
 function shuffle(array : string[]) {
   let currentIndex = array.length,
     randomIndex;
@@ -36,6 +41,8 @@ export default function ClientAuthenticatedQuiz({
 }: {
   activeQuestions: any;
 }) {
+  console.log(getDueDate());
+  
   let router = useRouter();
   const {data: session} = useSession();
   const userId = session?.user.id;
@@ -122,7 +129,7 @@ export default function ClientAuthenticatedQuiz({
                 return (
                   <button
                     ref={index === 0 ? buttonFocusRef : null}
-                    className="border border-blue-500 text-blue-500 m-2 p-2 hover:bg-blue-500 hover:text-black focus:ring focus:ring-green-500"
+                    className="border border-blue-500 text-blue-500 m-2 p-2 lg:hover:bg-blue-500 lg:hover:text-black"
                     key={index}
                     onClick={() => handleClick(answer)}
                   >

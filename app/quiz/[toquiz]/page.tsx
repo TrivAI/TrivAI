@@ -2,12 +2,46 @@ import { notFound } from "next/navigation";
 import TabSwitcher from "../../components/TabSwitcher";
 import { db } from "@/src/db";
 import ClientAuthenticatedQuiz from "./ClientAuthenticatedQuiz";
-import { getDate } from "@/src/getDate";
 import { getCurrentUser } from "@/src/session";
 import ClientUnauthenticatedQuiz from "./ClientUnauthenticatedQuiz";
 
 interface Routes {
   [key: string]: JSX.Element;
+}
+
+// function getDueDate() {
+//   let timeZoneOffset = new Date().getTimezoneOffset() * 60000;
+//   return new Date(Date.now() - timeZoneOffset).toLocaleDateString();
+// }
+
+// function getDueDate() {
+//   var currentDate = new Date();
+//   var offset = 7 * 60 * 60 * 1000; // Offset in milliseconds for GMT-7
+//   var adjustedDate = new Date(currentDate.getTime() - offset);
+//   var month = (adjustedDate.getMonth() + 1).toString().padStart(2, "0");
+//   var day = adjustedDate.getDate().toString().padStart(2, "0");
+//   var year = adjustedDate.getFullYear();
+//   return month + "/" + day + "/" + year;
+// }
+
+function getDueDate() {
+  var currentDate = new Date();
+  var offset = 7 * 60 * 60 * 1000; // Offset in milliseconds for GMT-7
+  var adjustedDate = new Date(currentDate.getTime() - offset);
+  var month = (adjustedDate.getMonth() + 1).toString();
+  var day = adjustedDate.getDate().toString().padStart(2, "0");
+  var year = adjustedDate.getFullYear();
+  return month + "/" + day + "/" + year;
+}
+
+function getDate() {
+  var currentDate = new Date();
+  var offset = 7 * 60 * 60 * 1000; // Offset in milliseconds for GMT-7
+  var adjustedDate = new Date(currentDate.getTime() - offset);
+  var year = adjustedDate.getFullYear();
+  var month = (adjustedDate.getMonth() + 1).toString().padStart(2, "0");
+  var day = adjustedDate.getDate().toString().padStart(2, "0");
+  return year + "-" + month + "-" + day;
 }
 
 function flattenObjectToStringArray(array: any[]) {
@@ -35,7 +69,7 @@ async function getUsersAnswersForToday(userId: string, category : string) {
       userId: userId,
       category: category.toUpperCase() as any,
       createdAt: {
-        gte: today + "T00:00:00.000Z",
+        gte: getDate() + "T00:00:00.000Z",
       },
     },
     select: {
@@ -50,7 +84,7 @@ async function getActiveQuestionsByCategoryForUser(category: string, userId: str
     where: {
       category: category.toUpperCase() as any,
       // change when ready to go live to 0
-      dateDue: getDate(1),
+      dateDue: getDueDate(),
     },
     select: {
       image: true,

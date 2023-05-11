@@ -3,12 +3,28 @@ import { db } from "@/src/db";
 import Image from "next/image";
 const routes = [ "Pokemon", "Movies", "Games", "Geography", "Cars"];
 
-function getDueDate(daysInAdvance : number = 0) {
-  const date = new Date();
-  const month = date.getMonth() + 1;
-  const day = date.getDate() + daysInAdvance;
-  const year = date.getFullYear();
-  return `${month}/${day}/${year}`;
+// function getDueDate() {
+//   let timeZoneOffset = new Date().getTimezoneOffset() * 60000;
+//   return new Date(Date.now() - timeZoneOffset).toLocaleDateString();
+// }
+
+// function getDueDate() {
+//   var currentDate = new Date();
+//   var offset = 7 * 60 * 60 * 1000; // Offset in milliseconds for GMT-7
+//   var adjustedDate = new Date(currentDate.getTime() - offset);
+//   var month = (adjustedDate.getMonth() + 1).toString().padStart(2, "0");
+//   var day = adjustedDate.getDate().toString().padStart(2, "0");
+//   var year = adjustedDate.getFullYear();
+//   return month + "/" + day + "/" + year;
+// }
+function getDueDate() {
+  var currentDate = new Date();
+  var offset = 7 * 60 * 60 * 1000; // Offset in milliseconds for GMT-7
+  var adjustedDate = new Date(currentDate.getTime() - offset);
+  var month = (adjustedDate.getMonth() + 1).toString();
+  var day = adjustedDate.getDate().toString().padStart(2, "0");
+  var year = adjustedDate.getFullYear();
+  return month + "/" + day + "/" + year;
 }
 
 async function getEachFirstActiveQuestionByCategory() {
@@ -28,7 +44,7 @@ async function getEachFirstActiveQuestionByCategory() {
     let question = await db.question.findFirst({
       where: {
         category: category,
-        dateDue: getDueDate(1),
+        dateDue: getDueDate(),
       },
       select: {
         image: true,
@@ -41,6 +57,8 @@ async function getEachFirstActiveQuestionByCategory() {
 }
 
 export default async function Home() {
+  console.log(getDueDate());
+  
     let questions = await getEachFirstActiveQuestionByCategory();
     
     if (questions.length === 0) {
