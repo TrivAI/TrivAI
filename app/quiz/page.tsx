@@ -3,9 +3,19 @@ import { db } from "@/src/db";
 import Image from "next/image";
 const routes = [ "Pokemon", "Movies", "Games", "Geography", "Cars"];
 
+// function getDueDate() {
+//   let timeZoneOffset = new Date().getTimezoneOffset() * 60000;
+//   return new Date(Date.now() - timeZoneOffset).toLocaleDateString();
+// }
+
 function getDueDate() {
-  let timeZoneOffset = new Date().getTimezoneOffset() * 60000;
-  return new Date(Date.now() - timeZoneOffset).toLocaleDateString();
+  var currentDate = new Date();
+  var offset = 7 * 60 * 60 * 1000; // Offset in milliseconds for GMT-7
+  var adjustedDate = new Date(currentDate.getTime() - offset);
+  var month = (adjustedDate.getMonth() + 1).toString().padStart(2, "0");
+  var day = adjustedDate.getDate().toString().padStart(2, "0");
+  var year = adjustedDate.getFullYear();
+  return month + "/" + day + "/" + year;
 }
 
 async function getEachFirstActiveQuestionByCategory() {
