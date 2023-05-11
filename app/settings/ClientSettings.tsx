@@ -17,7 +17,7 @@ export default function ClientSettings() {
         <button
           aria-label="Button does nothing just for fun"
           title="this actually does not do anything haha, watch refresh the page"
-          className="border-2 border-indigo-500 p-4 hover:bg-indigo-500 hover:text-black"
+          className="border-2 border-indigo-500 p-4 lg:hover:bg-indigo-500 lg:hover:text-black"
           onClick={() => setScore(score + 1)}
         >
           <b>ONE UP</b>
@@ -26,7 +26,7 @@ export default function ClientSettings() {
           <button
             aria-label="Reset score"
             title="this button might ruin your day :)"
-            className="border-2 border-red-500 p-4 hover:bg-red-500 hover:text-black"
+            className="border-2 border-red-500 p-4 lg:hover:bg-red-500 lg:hover:text-black"
             onClick={() => {
               resetScore();
               setScore(0);
@@ -38,7 +38,7 @@ export default function ClientSettings() {
           <button
             aria-label="Reset score"
             title="this button might ruin your day :)"
-            className="border-2 border-red-500 p-4 hover:bg-red-500 hover:text-black"
+            className="border-2 border-red-500 p-4 lg:hover:bg-red-500 lg:hover:text-black"
             onClick={() => {
               setScore(0);
             }}
@@ -51,7 +51,7 @@ export default function ClientSettings() {
         <button
           title="Delete account"
           aria-label="Delete account"
-          className="border-2 border-red-500 p-4 hover:bg-red-500 hover:text-black"
+          className="border-2 border-red-500 p-4 lg:hover:bg-red-500 lg:hover:text-black"
           onClick={() => {
             try {
               deleteAccount();

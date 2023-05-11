@@ -129,7 +129,7 @@ export default function ClientAuthenticatedQuiz({
                 return (
                   <button
                     ref={index === 0 ? buttonFocusRef : null}
-                    className="border border-blue-500 text-blue-500 m-2 p-2 hover:bg-blue-500 hover:text-black"
+                    className="border border-blue-500 text-blue-500 m-2 p-2 lg:hover:bg-blue-500 lg:hover:text-black"
                     key={index}
                     onClick={() => handleClick(answer)}
                   >
