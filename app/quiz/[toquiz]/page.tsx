@@ -15,11 +15,21 @@ interface Routes {
 //   return new Date(Date.now() - timeZoneOffset).toLocaleDateString();
 // }
 
+// function getDueDate() {
+//   var currentDate = new Date();
+//   var offset = 7 * 60 * 60 * 1000; // Offset in milliseconds for GMT-7
+//   var adjustedDate = new Date(currentDate.getTime() - offset);
+//   var month = (adjustedDate.getMonth() + 1).toString().padStart(2, "0");
+//   var day = adjustedDate.getDate().toString().padStart(2, "0");
+//   var year = adjustedDate.getFullYear();
+//   return month + "/" + day + "/" + year;
+// }
+
 function getDueDate() {
   var currentDate = new Date();
   var offset = 7 * 60 * 60 * 1000; // Offset in milliseconds for GMT-7
   var adjustedDate = new Date(currentDate.getTime() - offset);
-  var month = (adjustedDate.getMonth() + 1).toString().padStart(2, "0");
+  var month = (adjustedDate.getMonth() + 1).toString();
   var day = adjustedDate.getDate().toString().padStart(2, "0");
   var year = adjustedDate.getFullYear();
   return month + "/" + day + "/" + year;
