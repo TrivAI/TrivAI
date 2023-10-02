@@ -102,7 +102,7 @@ export default function ClientAuthenticatedQuiz({
       <div className="flex flex-col justify-center items-center">
         <div className="py-4 px-4 lg:px-24 flex flex-nowrap justify-between w-[100dvw]">
           <p>Current Score: {totalScore}</p>
-          <p className="">Questions left for today: 20</p>
+          <p className="">Questions left for today: {questions.length}</p>
         </div>
         {question ? (
           <div>
