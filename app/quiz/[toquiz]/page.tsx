@@ -9,21 +9,6 @@ interface Routes {
   [key: string]: JSX.Element;
 }
 
-// function getDueDate() {
-//   let timeZoneOffset = new Date().getTimezoneOffset() * 60000;
-//   return new Date(Date.now() - timeZoneOffset).toLocaleDateString();
-// }
-
-// function getDueDate() {
-//   var currentDate = new Date();
-//   var offset = 7 * 60 * 60 * 1000; // Offset in milliseconds for GMT-7
-//   var adjustedDate = new Date(currentDate.getTime() - offset);
-//   var month = (adjustedDate.getMonth() + 1).toString().padStart(2, "0");
-//   var day = adjustedDate.getDate().toString().padStart(2, "0");
-//   var year = adjustedDate.getFullYear();
-//   return month + "/" + day + "/" + year;
-// }
-
 function getDueDate() {
   var currentDate = new Date();
   var offset = 7 * 60 * 60 * 1000; // Offset in milliseconds for GMT-7
@@ -61,16 +46,10 @@ async function getActiveCategories() {
 }
 
 async function getUsersAnswersForToday(userId: string, category : string) {
-  let timeZoneOffset = new Date().getTimezoneOffset() * 60000;
-  let today = new Date(Date.now() - timeZoneOffset).toISOString().slice(0,10);
-
   return await db.userAnswers.findMany({
     where: {
       userId: userId,
       category: category.toUpperCase() as any,
-      createdAt: {
-        gte: getDate() + "T00:00:00.000Z",
-      },
     },
     select: {
       questionId: true,
@@ -84,7 +63,6 @@ async function getActiveQuestionsByCategoryForUser(category: string, userId: str
     where: {
       category: category.toUpperCase() as any,
       // change when ready to go live to 0
-      dateDue: getDueDate(),
     },
     select: {
       image: true,
