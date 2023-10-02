@@ -121,7 +121,7 @@ export default function ClientAuthenticatedQuiz({
                 {" "}
                 {`Can you guess the ${removeTrailingS(
                   question.category.toLowerCase()
-                )} ??🙈`}
+                )} ??`}
               </b>
             </h1>
             <div className="my-12 grid grid-cols-2">
