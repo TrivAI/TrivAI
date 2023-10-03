@@ -26,11 +26,6 @@ const initialState: UserState = {
 
 export const useStore = create<UserState & Actions>((set, get) => ({
     ...initialState,
-    id: '',
-    name: '',
-    totalScore: 0,
-    cheatUsed: false,
-    image: '',
     incrementScore: async (pointAmount) => {
         const response = await fetch(new URL("/api/score", checkEnvironment()), {
             method: 'PUT',
